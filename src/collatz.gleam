@@ -19,17 +19,28 @@ fn helper(num: Int, acc: List(Int)) {
   }
 }
 
-fn collatz(num: String) -> List(Int) {
-  case int.parse(num) {
-    Ok(n) -> helper(n, [n]) |> list.reverse
-    Error(Nil) -> []
-  }
+fn collatz(num: Int) -> List(Int) {
+  helper(num, [num])
+  |> list.reverse
 }
 
 pub fn main() {
-  case argv.load().arguments {
-    [num] -> collatz(num)
-    _ -> []
+  let n = case argv.load().arguments {
+    [num] ->
+      case int.parse(num) {
+        Ok(n) -> n
+        Error(Nil) -> 0
+      }
+    _ -> 0
   }
-  |> io.debug
+
+  let out = case n {
+    n if n > 0 -> collatz(n)
+    _ -> {
+      io.println("Invalid arg")
+      []
+    }
+  }
+
+  io.debug(out)
 }
