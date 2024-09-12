@@ -10,7 +10,7 @@ type ArgTypes {
   Invalid
 }
 
-pub fn next_value(num: Int) -> Int {
+fn next_value(num: Int) -> Int {
   case int.is_even(num) {
     True -> num / 2
     False -> 3 * num + 1
@@ -26,7 +26,7 @@ fn helper(num: Int, acc: List(Int)) {
   }
 }
 
-fn collatz(num: Int) -> List(Int) {
+pub fn collatz(num: Int) -> List(Int) {
   helper(num, [num])
   |> list.reverse
 }

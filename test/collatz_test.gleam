@@ -6,7 +6,7 @@ pub fn main() {
   gleeunit.main()
 }
 
-pub fn next_value_test() {
-  collatz.next_value(5)
-  |> should.equal(16)
+pub fn collatz_test() {
+  collatz.collatz(5)
+  |> should.equal([5, 16, 8, 4, 2, 1])
 }
